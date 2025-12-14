@@ -18,6 +18,13 @@ namespace Academy
             Age = age;
             Console.WriteLine($"HConstructor:{GetHashCode()}");
         }
+        public Human(Human other)
+        {
+            this.LastName = other.LastName;
+            this.FirstName = other.FirstName;
+            this.Age = other.Age;
+            Console.WriteLine($"HCopyConstructor:\t{GetHashCode()}");
+        }
         ~Human()
             {
                 Console.WriteLine($"HConstructor:{GetHashCode()}");

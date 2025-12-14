@@ -17,6 +17,15 @@ namespace Academy
             this.Speciality = speciality;
             Console.WriteLine($"AMConstructor:\t{GetHashCode()}");
         }
+        public AcademyMember(Human human, string speciality):base(human)
+        {
+            this.Speciality = speciality;
+        }
+        public AcademyMember(AcademyMember other):base(other)
+        {
+            this.Speciality = other.Speciality;
+            Console.WriteLine($"AMCopyConstructor:\t{GetHashCode()}");
+        }
         ~AcademyMember()
         {
             Console.WriteLine($"AMDestructor:\t{GetHashCode()}");

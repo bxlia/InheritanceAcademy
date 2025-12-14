@@ -23,7 +23,11 @@ namespace Academy
         Subject = subject;
         Console.WriteLine($"GConstructor:\t{GetHashCode()}");
     }
-
+        public Graduate(Student student, string subject):base(student)
+        {
+            Subject = subject;
+            Console.WriteLine($"GDestructor:\t{GetHashCode()}");
+        }
     ~Graduate()
     {
         Console.WriteLine($"GDestructor:\t{GetHashCode()}");
