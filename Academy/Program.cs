@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.IO;
-using System.Diagnostics;
 using System.Xml.Linq;
 using System.Linq.Expressions;
 
@@ -96,47 +94,10 @@ namespace Academy
             Process.Start("notepad", filename);
 #endif
 
-            Human[] group = Load("P_421.csv");
-            Print(group);
+            Human[] group = Streamer.Load("P_421.csv");
+            Streamer.Print(group);
             Console.WriteLine("end");
         }
-        static void Print(Human[] group)
-        {
-            Console.WriteLine(delimiter);
-            for (int i = 0; i < group.Length; i++)
-            {
-                Console.WriteLine(group[i]);
-            }
-            Console.WriteLine(delimiter);
-        }
-        static void Save(Human[] group, string filename)
-        {
-
-        }
-        static Human[] Load(string filename)
-        {
-            List<Human> group = new List<Human>();
-            try
-            {
-                Directory.SetCurrentDirectory("..\\..");
-                StreamReader reader = new StreamReader(filename);
-                Factory factory = new Factory();
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    //Console.WriteLine(line);
-                    String[] values = line.Split(":,;".ToCharArray());
-                    //for (int i = 0; i < strings.Length; i++) Console.Write($"{strings[i]}\t");
-                    Console.WriteLine();
-                    group.Add(factory.Create(values[0]).Init(values));
-                }
-                reader.Close();
-            }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            return group.ToArray();
-        }
+        
     }
 }
