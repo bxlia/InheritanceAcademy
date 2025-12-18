@@ -37,10 +37,26 @@ namespace Academy
         {
            Console.WriteLine($"SDestructor:\t{GetHashCode()}");
         }
-        public void Info()
+        public override Human Init(string[] values)
+        {
+            base.Init(values);
+            Group = values[5];
+            Rating = Convert.ToDouble(values[6]);
+            Attendance = Convert.ToDouble(values[7]);
+            return this;
+        }
+        public override void Info()
         {
             base.Info();
             Console.WriteLine($"{Group}{Rating}{Attendance}");
+        }
+        public override string ToString()
+        {
+            return base.ToString() + $" {Group.PadRight(5)} {Rating.ToString().PadRight(5)} {Attendance.ToString().PadRight(5)}";
+        }
+        public override string ToFileString()
+        {
+            return base.ToFileString() + $",{Group},{Rating},{Attendance}";
         }
     }
 }

@@ -32,11 +32,24 @@ namespace Academy
     {
         Console.WriteLine($"GDestructor:\t{GetHashCode()}");
     }
-
-    public new void Info()
+        public override Human Init(string[] values)
+        {
+            base.Init(values);
+            Subject = values[8];
+            return this;
+        }
+    public override void Info()
     {
         base.Info();
         Console.WriteLine($"Тема диплома: {Subject}");
     }
-}
+        public override string ToString()
+        {
+            return base.ToString() + $" {Subject}";
+        }
+        public override string ToFileString()
+        {
+            return base.ToFileString()+$",{Subject}";
+        }
+    }
 }
