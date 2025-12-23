@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36518.9 d17.14
+VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inheritance", "Inheritance\Inheritance.csproj", "{BF8D419A-64B5-4D22-95ED-DA92685F4863}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{F7B7F3AC-CFB4-4BBD-88C8-310524636B12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{D5EA604B-89A4-4C78-80EB-FEAAA977F900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F7B7F3AC-CFB4-4BBD-88C8-310524636B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7B7F3AC-CFB4-4BBD-88C8-310524636B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7B7F3AC-CFB4-4BBD-88C8-310524636B12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5EA604B-89A4-4C78-80EB-FEAAA977F900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5EA604B-89A4-4C78-80EB-FEAAA977F900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5EA604B-89A4-4C78-80EB-FEAAA977F900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5EA604B-89A4-4C78-80EB-FEAAA977F900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
