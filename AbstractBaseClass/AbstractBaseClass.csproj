@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5EA604B-89A4-4C78-80EB-FEAAA977F900}</ProjectGuid>
+    <ProjectGuid>{7ED2138A-C8DE-4C17-BCD2-9B5F7D79FE7D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Exceptions</RootNamespace>
-    <AssemblyName>Exceptions</AssemblyName>
+    <RootNamespace>AbstractBaseClass</RootNamespace>
+    <AssemblyName>AbstractBaseClass</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,11 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirVehicle.cs" />
+    <Compile Include="GroundVehicle\Bike.cs" />
+    <Compile Include="GroundVehicle\Car.cs" />
+    <Compile Include="GroundVehicle.cs" />
+    <Compile Include="GroundVehicle\OnRaills.cs" />
+    <Compile Include="GroundVehicle\OnRoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="GroundVehicle\Train.cs" />
+    <Compile Include="GroundVehicle\Tramwai.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
