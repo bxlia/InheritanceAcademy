@@ -30,6 +30,8 @@ namespace Geometry
             PaintEventArgs e = new PaintEventArgs(graphics, window_rect);
             Pen pen = new Pen(Color.Red, 5);
             e.Graphics.DrawRectangle(pen, 100, 100, 500, 500);
+            Square square = new Square(50, 200, 200, 1, Color.Red);
+            square.Info(e);
                 
         }
         [DllImport("kernel32.dll")]
