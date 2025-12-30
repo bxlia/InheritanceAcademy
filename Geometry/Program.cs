@@ -22,7 +22,7 @@ namespace Geometry
 
             IntPtr hwnd = GetConsoleWindow(); //Получаем окно консоли
             Graphics graphics = Graphics.FromHwnd(hwnd); 
-            Rectangle window_rect = new Rectangle //Получаем прямоугольник окна консоли
+            System.Drawing.Rectangle window_rect = new System.Drawing.Rectangle //Получаем прямоугольник окна консоли
                 (
                 Console.WindowLeft, Console.WindowTop,
                 Console.WindowWidth, Console.WindowHeight
@@ -32,6 +32,16 @@ namespace Geometry
             e.Graphics.DrawRectangle(pen, 100, 100, 500, 500);
             Square square = new Square(50, 200, 200, 1, Color.Red);
             square.Info(e);
+            Rectangle rectangle = new Rectangle(200, 150, 400, 200, 2, Color.LemonChiffon);
+            rectangle.Info(e);
+
+            Circle circle = new Circle(150, 500, 100, 3, Color.LawnGreen);
+            circle.Info(e);
+
+            EquilateralTriangle equilateral = new EquilateralTriangle(100, 800, 300, 5, Color.DarkSalmon);
+            equilateral.Info(e);
+            IsoscalesTriangle isoscales = new IsoscalesTriangle(100, 70, 800, 100, 1, Color.DarkBlue);
+            isoscales.Info(e);
                 
         }
         [DllImport("kernel32.dll")]
