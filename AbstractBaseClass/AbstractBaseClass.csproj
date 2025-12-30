@@ -43,17 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airship.cs" />
     <Compile Include="AirVehicle.cs" />
+    <Compile Include="Bathyscaphe.cs" />
     <Compile Include="GroundVehicle\Bike.cs" />
     <Compile Include="GroundVehicle\Car.cs" />
     <Compile Include="GroundVehicle.cs" />
     <Compile Include="GroundVehicle\OnRaills.cs" />
     <Compile Include="GroundVehicle\OnRoad.cs" />
+    <Compile Include="Helicopter.cs" />
+    <Compile Include="OnWater.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroundVehicle\Train.cs" />
     <Compile Include="GroundVehicle\Tramwai.cs" />
+    <Compile Include="Ship.cs" />
+    <Compile Include="UnderWater.cs" />
     <Compile Include="Vehicle.cs" />
+    <Compile Include="WaterVehicle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
