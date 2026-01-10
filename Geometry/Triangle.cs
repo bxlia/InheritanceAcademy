@@ -1,94 +1,194 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Geometry
 {
-    abstract internal class Triangle:Shape
+    abstract internal class Triangle : Shape, IHaveHeight
     {
-        public Triangle(int startX, int startY, int lineWeidth, System.Drawing.Color color):
-            base(startX, startY, lineWeidth, color)
+        public Triangle(int startX, int startY, int lineWidth, Color color)
+            : base(startX, startY, lineWidth, color)
         {
-
         }
+
         public abstract double GetHeight();
+        public abstract void DrawHeight(PaintEventArgs e);
+
         public override void Info(PaintEventArgs e)
         {
-            Console.WriteLine($"Высота треугольника: \t");
+            Console.WriteLine($"Высота треугольника: {GetHeight():F2}");
             base.Info(e);
         }
+    }
 
-        class EquilateralTriangle : Triangle
+    internal class EquilateralTriangle : Triangle
+    {
+        private float side;
+
+        public float Side
         {
-            float side;
-            public float Side
-            { get => side;
-                set => side = FilterSize(value);
-            }
-            public EquilateralTriangle(float side, int startX, int startY, int lineWidth, System.Drawing.Color color):
-                base(startX, startY, lineWidth, color)
-                { this.side = side; }
-            public override double GetHeight()=>Math.Sqrt(Math.Pow(Side, 2) - Math.Pow(Side / 2, 1));
-            public override double GetArea() => Side * GetHeight() / 2;
-            public override double GetPerimeter() => Side * 3;
-            public override void Draw(PaintEventArgs e)
-            {
-                System.Drawing.Pen pen = new System.Drawing.Pen(Color, LineWIdth);
-                System.Drawing.Point[] points =
-                    {
-                    new System.Drawing.Point(StartX, (int)(StartY+GetHeight())),
-                    new System.Drawing.Point((int)(StartX+Side),(int)(StartY+GetHeight())),
-                    new System.Drawing.Point((int)(StartX+Side/2), (int)(StartY))
-                   
-                };
-                e.Graphics.DrawPolygon(pen, points);
+            get => side;
+            set => side = FilterSize(value);
+        }
 
-            }
-            public override void Info(PaintEventArgs e)
-            {
-                Console.WriteLine($"Дина стороны: {Side}");
-                base.Info(e);
-            }
-            class IsoscalesTriangle : Triangle
-            {
-                float @base;
-                float side;
-                public float Base
-                {
-                    get => @base;
-                    set => @base = FilterSize(value);
-                }
-                public float Side
-                {
-                    get => side;
-                    set => side = FilterSize(value);
-                }
-                public IsoscalesTriangle(float @base, float side, int startX, int startY, int lineWidth, System.Drawing.Color color) :
-                    base(startX, startY, lineWidth, color)
-                {
-                    this.@base = @base;
-                    this.side = side;
-                }
-                public override double GetHeight() => Math.Sqrt(Math.Pow(Side, 2) - Math.Pow(Base / 2, 2));
-                public override double GetArea() => Base * GetHeight() / 2;
-                public override double GetPerimeter() => Base + Side * 2;
-                public override void Draw(PaintEventArgs e)
-                {
-                    System.Drawing.Pen pen = new System.Drawing.Pen(Color, LineWIdth);
-                    System.Drawing.Point[] points =
-                        {
-                            new System.Drawing.Point(StartX, (int)(StartY + GetHeight())),
-                            new System.Drawing.Point((int)(StartX + Base), (int)(StartY+GetHeight())),
-                            new System.Drawing.Point((int)(StartX + Base/2), StartY)
-                        };
-                    e.Graphics.DrawPolygon(pen, points);
-                }
-            }
-            }
+        public EquilateralTriangle(float side, int startX, int startY, int lineWidth, Color color)
+            : base(startX, startY, lineWidth, color)
+        {
+            this.side = side;
+        }
 
+        public override double GetHeight() => Math.Sqrt(side * side - (side / 2) * (side / 2));
+        public override double GetArea() => side * GetHeight() / 2;
+        public override double GetPerimeter() => side * 3;
 
+        public override void Draw(PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color, LineWIdth);
+            Point[] points =
+            {
+                new Point(StartX, (int)(StartY + GetHeight())),
+                new Point((int)(StartX + side), (int)(StartY + GetHeight())),
+                new Point((int)(StartX + side / 2), StartY)
+            };
+            e.Graphics.DrawPolygon(pen, points);
+        }
+
+        public override void DrawHeight(PaintEventArgs e)
+        {
+            Pen heightPen = new Pen(Color.Red, 1);
+            float height = (float)GetHeight();
+            float topX = StartX + side / 2;
+            float topY = StartY;
+            float baseX = StartX + side / 2;
+            float baseY = StartY + height;
+            e.Graphics.DrawLine(heightPen, topX, topY, baseX, baseY);
+        }
+
+        public override void Info(PaintEventArgs e)
+        {
+            Console.WriteLine($"Длина: {side}");
+            base.Info(e);
         }
     }
+
+    internal class IsoscelesTriangle : Triangle
+    {
+        private float baseLength;
+        private float equalSide;
+
+        public float BaseLength
+        {
+            get => baseLength;
+            set => baseLength = FilterSize(value);
+        }
+
+        public float EqualSide
+        {
+            get => equalSide;
+            set => equalSide = FilterSize(value);
+        }
+
+        public IsoscelesTriangle(float baseLength, float equalSide, int startX, int startY, int lineWidth, Color color)
+            : base(startX, startY, lineWidth, color)
+        {
+            this.baseLength = baseLength;
+            this.equalSide = equalSide;
+        }
+
+        public override double GetHeight() => Math.Sqrt(equalSide * equalSide - (baseLength / 2) * (baseLength / 2));
+        public override double GetArea() => baseLength * GetHeight() / 2;
+        public override double GetPerimeter() => baseLength + 2 * equalSide;
+
+        public override void Draw(PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color, LineWIdth);
+            float height = (float)GetHeight();
+            Point[] points =
+            {
+                new Point(StartX, (int)(StartY + height)),
+                new Point((int)(StartX + baseLength), (int)(StartY + height)),
+                new Point((int)(StartX + baseLength / 2), StartY)
+            };
+            e.Graphics.DrawPolygon(pen, points);
+        }
+
+        public override void DrawHeight(PaintEventArgs e)
+        {
+            Pen heightPen = new Pen(Color.Red, 1);
+            float height = (float)GetHeight();
+            float topX = StartX + baseLength / 2;
+            float topY = StartY;
+            float baseX = StartX + baseLength / 2;
+            float baseY = StartY + height;
+            e.Graphics.DrawLine(heightPen, topX, topY, baseX, baseY);
+        }
+
+        public override void Info(PaintEventArgs e)
+        {
+            Console.WriteLine($"Основание: {baseLength}");
+            Console.WriteLine($"Сторона: {equalSide}");
+            base.Info(e);
+        }
+    }
+
+    internal class RightTriangle : Triangle
+    {
+        private float cathet1;
+        private float cathet2;
+
+        public float Cathet1
+        {
+            get => cathet1;
+            set => cathet1 = FilterSize(value);
+        }
+
+        public float Cathet2
+        {
+            get => cathet2;
+            set => cathet2 = FilterSize(value);
+        }
+
+        public RightTriangle(float cathet1, float cathet2, int startX, int startY, int lineWidth, Color color)
+            : base(startX, startY, lineWidth, color)
+        {
+            this.cathet1 = cathet1;
+            this.cathet2 = cathet2;
+        }
+
+        public double Hypotenuse => Math.Sqrt(cathet1 * cathet1 + cathet2 * cathet2);
+        public override double GetHeight() => (cathet1 * cathet2) / Hypotenuse;
+        public override double GetArea() => cathet1 * cathet2 / 2;
+        public override double GetPerimeter() => cathet1 + cathet2 + Hypotenuse;
+
+        public override void Draw(PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color, LineWIdth);
+            Point[] points =
+            {
+                new Point(StartX, StartY),
+                new Point(StartX + (int)cathet1, StartY),
+                new Point(StartX, StartY + (int)cathet2)
+            };
+            e.Graphics.DrawPolygon(pen, points);
+        }
+
+        public override void DrawHeight(PaintEventArgs e)
+        {
+            Pen heightPen = new Pen(Color.Red, 1);
+            float h = (float)GetHeight();
+            float baseX = StartX;
+            float baseY = StartY;
+            float endX = StartX + (float)(h * cathet2 / Hypotenuse);
+            float endY = StartY + (float)(h * cathet1 / Hypotenuse);
+            e.Graphics.DrawLine(heightPen, baseX, baseY, endX, endY);
+        }
+
+        public override void Info(PaintEventArgs e)
+        {
+            Console.WriteLine($"Катет: {cathet1}");
+            Console.WriteLine($"Катет: {cathet2}");
+            Console.WriteLine($"Гипотенуза: {Hypotenuse:F2}");
+            base.Info(e);
+        }
+    }
+}
